@@ -2,11 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-	  <Version>0.1.0</Version>
+	  <Version>0.1.3</Version>
+
+    <RepositoryUrl>https://github.com/mnemonic-bit/SampleNuget</RepositoryUrl>
+    <Authors>mruether</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <PackageId>mnemonic-bit.SampleNuget</PackageId>
+    <Description>Nothing special, just a sample.</Description>
 	  <IsPackable>true</IsPackable>
+
 	  <AssemblyName>SampleNuget</AssemblyName>
 	  <RootNamespace>SampleNuget</RootNamespace>
-    <Nullable>enable</Nullable>
+    <Nullable>enable</Nullable>    
   </PropertyGroup>
 
   <ItemGroup>
