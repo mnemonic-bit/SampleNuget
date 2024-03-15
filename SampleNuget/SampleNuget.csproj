@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-	  <Version>0.1.6</Version>
+    <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
+    <Version>0.2.0</Version>
 
     <Title>Nuget sample project</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
