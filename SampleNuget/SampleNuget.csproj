@@ -2,15 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-	  <Version>0.1.5</Version>
+	  <Version>0.1.6</Version>
 
-    <RepositoryUrl>https://github.com/mnemonic-bit/SampleNuget</RepositoryUrl>
-    <Authors>mruether</Authors>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Title>Nuget sample project</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 
+    <RepositoryUrl>https://github.com/mnemonic-bit/SampleNuget</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <Authors>mruether</Authors>
+    <Copyright>mruether</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
     <PackageId>mnemonic-bit.SampleNuget</PackageId>
-    <Description>Nothing special, just a sample.</Description>
+    <Description>Nuget sample project for demonstrating how to push a Nuget from Github.</Description>
 	  <IsPackable>true</IsPackable>
 
 	  <AssemblyName>SampleNuget</AssemblyName>
