@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <Version>0.2.2</Version>
+    <Version>0.2.3</Version>
 
     <Title>Nuget sample project</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
 
-    <RepositoryUrl>https://github.com/mnemonic-bit/SampleNuget</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mnemonic-bit/SampleNuget.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
 
     <Authors>mruether</Authors>
