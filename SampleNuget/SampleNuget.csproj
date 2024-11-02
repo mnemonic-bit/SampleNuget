@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <Version>0.2.3</Version>
+    <Version>0.2.4</Version>
 
     <Title>Nuget sample project</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -20,6 +20,7 @@
     <Description>Nuget sample project for demonstrating how to push a Nuget from Github.</Description>
     <PackageTags>sample, nuget, package</PackageTags>
 	  <IsPackable>true</IsPackable>
+    <IsTrimmable>true</IsTrimmable>
 
 	  <AssemblyName>SampleNuget</AssemblyName>
 	  <RootNamespace>SampleNuget</RootNamespace>
