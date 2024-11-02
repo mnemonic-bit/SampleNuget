@@ -87,13 +87,15 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v4
 
-      # Publish all NuGet packages to NuGet.org
-      # Use --skip-duplicate to prevent errors if a package with the same version already exists.
-      # If you retry a failed workflow, already published packages will be skipped without error.
-      - name: Publish NuGet package
+      # Configure name and email of the git-user who will tag this commit
+      - name: Set Local Git Config
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
+          
+      # Tag commit with version from Nuget package
+      - name: Tag Git Commit
+        run: |
           foreach($file in (Get-ChildItem "." -Recurse -Include *.csproj)) {
             $VERSION = Select-String -Path "**/*.csproj" -Pattern '<Version>(.*?)</Version>' | ForEach-Object { $_.Matches.Groups[1].Value }
             $VERSION_STRING = "V$VERSION"
