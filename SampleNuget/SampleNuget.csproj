@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <Version>0.3.4</Version>
+    <Version>0.4.0</Version>
 
     <Title>Nuget sample project</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -25,6 +25,10 @@
 	  <AssemblyName>SampleNuget</AssemblyName>
 	  <RootNamespace>SampleNuget</RootNamespace>
     <Nullable>enable</Nullable>    
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
