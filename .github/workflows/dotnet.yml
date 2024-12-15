@@ -119,8 +119,12 @@ jobs:
             if ($IS_PACKABLE -ne "true") {
               continue
             }
+            $PROJECT_NAME = Select-String -Path $CSPROJ_PATH -Pattern '<AssemblyName>(.*?)</AssemblyName>' | ForEach-Object { $_.Matches.Groups[1].Value }
+            if (not $PROJECT_NAME) {
+              $PROJECT_NAME = $file.BaseName
+            }
             $VERSION = Select-String -Path $CSPROJ_PATH -Pattern '<Version>(.*?)</Version>' | ForEach-Object { $_.Matches.Groups[1].Value }
             $VERSION_STRING = "v$VERSION"
-            git tag -a $VERSION_STRING -m "Release v$VERSION"
+            git tag -a $VERSION_STRING -m "Release of $PROJECT_NAME with version v$VERSION"
             git push origin $VERSION_STRING
           }
