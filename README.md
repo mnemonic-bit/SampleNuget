@@ -56,6 +56,12 @@ at Github, which interprets the output of the script, and applies that output
 to pre-defined functions / tools. For more information about the syntax of
 this commands, please visit the [official documentation](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions).
 
+Another example to write just a note into the log, is using the note-command.
+
+```
+Write-Host "::notice file=dotnet.yml,line=114,endLine=129,title=This Is The Title::And this is the message which will be printed, even with replacing $VARIABLES if its necessary."
+```
+
 
 ## Credits and Disclaimer
 

@@ -27,7 +27,7 @@ defaults:
 jobs:
 
   run_tests:
-    runs-on: ubuntu-latest # ubuntu-24.04
+    runs-on: ubuntu-24.04 # ubuntu-latest OR ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
@@ -38,7 +38,7 @@ jobs:
         run: dotnet test --configuration Release
 
   create_nuget:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -59,7 +59,7 @@ jobs:
 
   deploy_nugets:
     #if: github.event_name == 'release'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [ run_tests, create_nuget ]
     steps:
       # Download the NuGet package created in the previous job
@@ -81,7 +81,7 @@ jobs:
           }
 
   deploy_docker:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [ deploy_nugets ]
     steps:
       - uses: actions/checkout@v4
@@ -111,8 +111,7 @@ jobs:
           foreach($file in (Get-ChildItem "." -Recurse -Include *.csproj)) {
             $CSPROJ_PATH = $file.FullName
 
-            Write-Host "::warning file=dotnet.yml,line=114,endLine=114,title=Build and Push::Building Docker from file for project $CSPROJ_PATH"
-            echo "::warning file=dotnet.yml,line=114,endLine=114,title=Build and Push::Building Docker from file for project $CSPROJ_PATH"
+            Write-Host "::notice file=dotnet.yml,line=114,endLine=114,title=Build and Push::Building Docker from file for project $CSPROJ_PATH"
 
             $IS_PACKABLE = Select-String -Path $CSPROJ_PATH -Pattern '<IsPackable>(.*?)</IsPackable>' | ForEach-Object { $_.Matches.Groups[1].Value }
             if ($IS_PACKABLE -eq "true") {
@@ -140,7 +139,7 @@ jobs:
           }
 
   tag_repository:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [ deploy_nugets ]
     steps:
       - uses: actions/checkout@v4
