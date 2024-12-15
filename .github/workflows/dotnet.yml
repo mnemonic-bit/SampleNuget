@@ -15,6 +15,7 @@ on:
     branches: [ main ]
   
 env:
+  UBUNTU_VERSION: ubuntu-latest # ubuntu-24.04
   DOTNET_UPGRADEASSISTANT_TELEMETRY_OPTOUT: 1
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO: true
@@ -27,7 +28,7 @@ defaults:
 jobs:
 
   run_tests:
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.UBUNTU_VERSION }}
     steps:
       - uses: actions/checkout@v4
 
@@ -38,7 +39,7 @@ jobs:
         run: dotnet test --configuration Release
 
   create_nuget:
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.UBUNTU_VERSION }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -59,7 +60,7 @@ jobs:
 
   deploy_nugets:
     #if: github.event_name == 'release'
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.UBUNTU_VERSION }}
     needs: [ run_tests, create_nuget ]
     steps:
       # Download the NuGet package created in the previous job
@@ -81,7 +82,7 @@ jobs:
           }
 
   deploy_docker:
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.UBUNTU_VERSION }}
     needs: [ deploy_nugets ]
     steps:
       - uses: actions/setup-dotnet@v4
@@ -130,7 +131,7 @@ jobs:
           }
 
   tag_repository:
-    runs-on: ubuntu-latest
+    runs-on: ${{ env.UBUNTU_VERSION }}
     needs: [ deploy_nugets ]
     steps:
       - uses: actions/checkout@v4
