@@ -101,7 +101,11 @@ jobs:
       #     registry: ghcr.io
       #     username: ${{ github.repository_owner }}
       #     password: ${{ secrets.GITHUB_TOKEN }}
-          
+      
+      - name: Test Output Of Step
+        shell: bash
+        run: echo "some outpout that should be visible!"
+        
       - name: Find API projects and build Docker images
         shell: pwsh
         run: |
