@@ -120,7 +120,7 @@ jobs:
               continue
             }
             $PROJECT_NAME = Select-String -Path $CSPROJ_PATH -Pattern '<AssemblyName>(.*?)</AssemblyName>' | ForEach-Object { $_.Matches.Groups[1].Value }
-            if (not $PROJECT_NAME) {
+            if (!$PROJECT_NAME) {
               $PROJECT_NAME = $file.BaseName
             }
             $VERSION = Select-String -Path $CSPROJ_PATH -Pattern '<Version>(.*?)</Version>' | ForEach-Object { $_.Matches.Groups[1].Value }
