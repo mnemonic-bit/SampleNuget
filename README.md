@@ -10,7 +10,7 @@ There are two points of interest here:
 * The `.github/workflows/dotnet.yml` file which defines how the parts come all together by means of a Github action.
 
 
-## How Can Push Nuget Packages to Nuget.org?
+## How Can We Push Nuget Packages to Nuget.org?
 
 To push Nuget packages to Nuget.org, you need an account on Nuget.org, and
 an API key from that site. For this, please log into your Nuget.org account
@@ -28,6 +28,33 @@ from your Nuget API Key you've created earlier.
 
 For reference, in this example project, the Secret name is `NUGET_API_KEY`,
 which is then used in the Github action.
+
+
+## How Can We Push Docker Container Images To hub.docker.com or ghcr.io?
+
+
+
+## How Can We Enable Debug Log-Messages For Github Actions?
+
+To enable debug log-messages for a Github action, we have to create a secret
+in that Github repository whose name is `ACTIONS_STEP_DEBUG`, and which has
+to have a value set to `true`.
+
+After that, we can just use any output-generating method of our scripting
+language of our choice, e.g. PowerShell, or Bash, and the write a message
+into the log of that action.
+
+As an example, we can use write a debug message to the action-log in a
+PowerShell script with this line:
+
+```
+Write-Host "::debug::This is a debug message."
+```
+
+Please note that `::debug` signifies a core-function of the action runner
+at Github, which interprets the output of the script, and applies that output
+to pre-defined functions / tools. For more information about the syntax of
+this commands, please visit the [official documentation](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions).
 
 
 ## Credits and Disclaimer
