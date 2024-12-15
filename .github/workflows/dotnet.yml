@@ -125,6 +125,7 @@ jobs:
             $VERSION_STRING = "v$VERSION"
 
             if (!$VERSION) {
+              Write-Host "::warning file=$($PROJECT_NAME).csproj,title=No Version Set For $($PROJECT_NAME)::The project $($PROJECT_NAME) does not have any version tag set in its csproj file."
               $VERSION = "latest"
             }
 
