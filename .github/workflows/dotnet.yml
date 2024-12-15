@@ -107,6 +107,9 @@ jobs:
         run: |
           foreach($file in (Get-ChildItem "." -Recurse -Include *.csproj)) {
             $CSPROJ_PATH = $file.FullName
+
+            Write-Host "Building Docker from file for project $CSPROJ_PATH"
+
             $IS_PACKABLE = Select-String -Path $CSPROJ_PATH -Pattern '<IsPackable>(.*?)</IsPackable>' | ForEach-Object { $_.Matches.Groups[1].Value }
             if ($IS_PACKABLE -eq "true") {
               continue
