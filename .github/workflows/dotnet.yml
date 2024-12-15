@@ -132,10 +132,14 @@ jobs:
               continue
             }
 
-            Write-Host "::notice file=dotnet.yml,line=111,endLine=140,title=Build and Push::Building Docker from file for project $($CSPROJ_PATH)."
+            Write-Host "::notice file=dotnet.yml,line=111,endLine=140,title=Build and Push::Building Docker image from file for project $($CSPROJ_PATH)."
             
+            Push-Location -Path $PROJECT_DIR
+
             #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" -t "ghcr.io/${{ github.repository_owner }}/$(projectName):latest" --push $PROJECT_DIR
-            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" --push $PROJECT_DIR
+            docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" --push $PROJECT_DIR
+
+            Pop-Location
           }
 
   tag_repository:
