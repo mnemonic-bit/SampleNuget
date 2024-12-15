@@ -57,10 +57,14 @@ to pre-defined functions / tools. For more information about the syntax of
 this commands, please visit the [official documentation](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions).
 
 Another example to write just a note into the log, is using the note-command.
+This will present a message on the action's summary page.
 
 ```
 Write-Host "::notice file=dotnet.yml,line=114,endLine=129,title=This Is The Title::And this is the message which will be printed, even with replacing $VARIABLES if its necessary."
 ```
+
+For normal messages which shall only appear in the log, you can just use a plain
+`Write-Host`.
 
 
 ## Credits and Disclaimer

@@ -111,7 +111,7 @@ jobs:
           foreach($file in (Get-ChildItem "." -Recurse -Include *.csproj)) {
             $CSPROJ_PATH = $file.FullName
 
-            Write-Host "::notice file=dotnet.yml,line=114,endLine=114,title=Build and Push::Building Docker from file for project $CSPROJ_PATH"
+            Write-Host "::debug::Checking project for fitness to build a Docker container from it. The project currently checked is $(CSPROJ_PATH)."
 
             $IS_PACKABLE = Select-String -Path $CSPROJ_PATH -Pattern '<IsPackable>(.*?)</IsPackable>' | ForEach-Object { $_.Matches.Groups[1].Value }
             if ($IS_PACKABLE -eq "true") {
@@ -128,11 +128,11 @@ jobs:
             $DOCKER_FILE_PATH = Join-Path $PROJECT_DIR "Dockerfile"
 
             if (-not (Test-Path $DOCKER_FILE_PATH)) {
-              echo "::debug::No Docker file found at path $DOCKER_FILE_PATH"
+              Write-Host "::debug::No Docker file found at path $DOCKER_FILE_PATH"
               continue
             }
 
-            echo "::debug::Found a Docker file for the project $(PROJECT_NAME), starting to build and push Docker images."
+            Write-Host "::notice file=dotnet.yml,line=111,endLine=140,title=Build and Push::Building Docker from file for project $(CSPROJ_PATH)."
             
             #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" -t "ghcr.io/${{ github.repository_owner }}/$(projectName):latest" --push $PROJECT_DIR
             docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" --push $PROJECT_DIR
