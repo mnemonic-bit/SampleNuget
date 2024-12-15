@@ -26,71 +26,6 @@ defaults:
 
 jobs:
 
-  deploy_docker_first:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      # - name: Login to GitHub Container Registry
-      #   uses: docker/login-action@v3
-      #   with:
-      #     registry: ghcr.io
-      #     username: ${{ github.repository_owner }}
-      #     password: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Find API projects and build Docker images
-        shell: pwsh
-        run: |
-          foreach($file in (Get-ChildItem "." -Recurse -Include *.csproj)) {
-            $CSPROJ_PATH = $file.FullName
-
-            Write-Host "::debug::Checking project for fitness to build a Docker container from it. The project currently checked is $($CSPROJ_PATH)."
-
-            $IS_PACKABLE = Select-String -Path $CSPROJ_PATH -Pattern '<IsPackable>(.*?)</IsPackable>' | ForEach-Object { $_.Matches.Groups[1].Value }
-            if ($IS_PACKABLE -eq "true") {
-              continue
-            }
-            $PROJECT_NAME = Select-String -Path $CSPROJ_PATH -Pattern '<AssemblyName>(.*?)</AssemblyName>' | ForEach-Object { $_.Matches.Groups[1].Value }
-            if (!$PROJECT_NAME) {
-              $PROJECT_NAME = $file.BaseName
-            }
-            $VERSION = Select-String -Path $CSPROJ_PATH -Pattern '<Version>(.*?)</Version>' | ForEach-Object { $_.Matches.Groups[1].Value }
-            $VERSION_STRING = "v$VERSION"
-
-            $PROJECT_DIR = $file.DirectoryName
-            $DOCKER_FILE_PATH = Join-Path $PROJECT_DIR "Dockerfile"
-
-            if (-not (Test-Path $DOCKER_FILE_PATH)) {
-              Write-Host "::debug::No Docker file found at path $DOCKER_FILE_PATH"
-              continue
-            }
-
-            Write-Host "::notice file=dotnet.yml,line=111,endLine=140,title=Build and Push::Building Docker image from file for project $($CSPROJ_PATH)."
-            
-            Push-Location -Path $PROJECT_DIR
-
-            $DOCKER_REPO_NAME = $PROJECT_NAME.ToLower()
-
-            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):latest" -t "ghcr.io/${{ github.repository_owner }}/$($DOCKER_REPO_NAME):latest" --push $PROJECT_DIR
-            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):latest" --push $PROJECT_DIR
-            docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):latest" --push $PROJECT_DIR
-
-            Pop-Location
-          }
-
-
   run_tests:
     runs-on: ubuntu-24.04 # ubuntu-latest OR ubuntu-24.04
     needs: [ deploy_docker_first ]
@@ -190,6 +125,10 @@ jobs:
             $VERSION = Select-String -Path $CSPROJ_PATH -Pattern '<Version>(.*?)</Version>' | ForEach-Object { $_.Matches.Groups[1].Value }
             $VERSION_STRING = "v$VERSION"
 
+            if (!$VERSION) {
+              $VERSION = "latest"
+            }
+
             $PROJECT_DIR = $file.DirectoryName
             $DOCKER_FILE_PATH = Join-Path $PROJECT_DIR "Dockerfile"
 
@@ -204,8 +143,9 @@ jobs:
 
             $DOCKER_REPO_NAME = $PROJECT_NAME.ToLower()
 
-            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):latest" -t "ghcr.io/${{ github.repository_owner }}/$($DOCKER_REPO_NAME):latest" --push $PROJECT_DIR
-            docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):latest" --push $PROJECT_DIR
+            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($$VERSION)" -t "ghcr.io/${{ github.repository_owner }}/$($DOCKER_REPO_NAME):$($$VERSION)" --push $PROJECT_DIR
+            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($$VERSION)" --push $PROJECT_DIR
+            docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($$VERSION)" --push $PROJECT_DIR
 
             Pop-Location
           }
