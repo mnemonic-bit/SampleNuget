@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleNuget", "SampleNuget\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleNugetTests", "SampleNugetTests\SampleNugetTests.csproj", "{DA9FEC49-595B-4CE6-A739-5FF869758B95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "SampleApi\SampleApi.csproj", "{EDD17319-E3E7-492C-91F9-0C361065D955}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DA9FEC49-595B-4CE6-A739-5FF869758B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA9FEC49-595B-4CE6-A739-5FF869758B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA9FEC49-595B-4CE6-A739-5FF869758B95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD17319-E3E7-492C-91F9-0C361065D955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD17319-E3E7-492C-91F9-0C361065D955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD17319-E3E7-492C-91F9-0C361065D955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD17319-E3E7-492C-91F9-0C361065D955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -39,8 +39,8 @@ adapted from
 https://github.com/meziantou/SampleNuGet
 ```
 
-Since its initial version it has been expanded and updated to match my personal
-requirements, and I use it to try and test my project-template that I use for my
-own projects.
+Since its initial version I have expanded and updated it to match my personal
+requirements, and I use it to try out and test ideas for my project-template that
+I use for my own projects.
 
 Please use it as it fits your needs.
