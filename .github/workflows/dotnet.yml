@@ -84,7 +84,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ deploy_nugets ]
     steps:
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -128,7 +131,7 @@ jobs:
               echo "No Docker file found at path $DOCKER_FILE_PATH"
               continue
             }
-            
+
             echo "No Docker file found at path $DOCKER_FILE_PATH"
             
             #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" -t "ghcr.io/${{ github.repository_owner }}/$(projectName):latest" --push $PROJECT_DIR
