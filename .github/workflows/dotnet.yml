@@ -112,16 +112,18 @@ jobs:
             if ($IS_PACKABLE -eq "true") {
               continue
             }
+
             $PROJECT_NAME = Select-String -Path $CSPROJ_PATH -Pattern '<AssemblyName>(.*?)</AssemblyName>' | ForEach-Object { $_.Matches.Groups[1].Value }
             if (!$PROJECT_NAME) {
               $PROJECT_NAME = $file.BaseName
             }
+            
             $VERSION = Select-String -Path $CSPROJ_PATH -Pattern '<Version>(.*?)</Version>' | ForEach-Object { $_.Matches.Groups[1].Value }
             $VERSION_STRING = "v$VERSION"
 
             $PROJECT_DIR = $file.DirectoryName
             $DOCKER_FILE_PATH = Join-Path $PROJECT_DIR "Dockerfile"
-
+            
             if (-not (Test-Path $DOCKER_FILE_PATH)) {
               Write-Host "::debug::No Docker file found at path $DOCKER_FILE_PATH"
               continue
