@@ -136,8 +136,10 @@ jobs:
             
             Push-Location -Path $PROJECT_DIR
 
-            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($PROJECT_NAME):latest" -t "ghcr.io/${{ github.repository_owner }}/$($PROJECT_NAME):latest" --push $PROJECT_DIR
-            docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($PROJECT_NAME):latest" --push $PROJECT_DIR
+            $DOCKER_REPO_NAME = $PROJECT_NAME.ToLower()
+
+            #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):latest" -t "ghcr.io/${{ github.repository_owner }}/$($DOCKER_REPO_NAME):latest" --push $PROJECT_DIR
+            docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):latest" --push $PROJECT_DIR
 
             Pop-Location
           }
