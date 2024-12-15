@@ -2,18 +2,12 @@
 name: Publish Nuget package
 
 
-# 
-# This script was taken and adapted from:
-# https://github.com/meziantou/SampleNuGet
-# 
-
-
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  
+
 env:
   DOTNET_UPGRADEASSISTANT_TELEMETRY_OPTOUT: 1
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
@@ -98,6 +92,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Uncomment this lines to activate the ghcr.io container registry to be used by this action.
       # - name: Login to GitHub Container Registry
       #   uses: docker/login-action@v3
       #   with:
@@ -144,8 +139,9 @@ jobs:
             $DOCKER_REPO_NAME = $PROJECT_NAME.ToLower()
 
             # Note: The parameter --platform linux/amd64,linux/arm64 can be used as well, but Dotnet does not seem to be ready for this kind of platform.
-            #docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($VERSION)" --push $PROJECT_DIR
-            docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($VERSION)" -t "ghcr.io/${{ github.repository_owner }}/$($DOCKER_REPO_NAME):$($VERSION)" --push $PROJECT_DIR
+            docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($VERSION)" --push $PROJECT_DIR
+            # Activate this line instead of the previour line to push to both, hub.docker.com, as well as ghcr.io
+            #docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($VERSION)" -t "ghcr.io/${{ github.repository_owner }}/$($DOCKER_REPO_NAME):$($VERSION)" --push $PROJECT_DIR
 
             Pop-Location
           }
