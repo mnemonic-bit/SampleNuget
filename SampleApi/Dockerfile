@@ -5,10 +5,10 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY . SampleApi
 # Copy all other dependecies as well before restoring and building.
-RUN dotnet restore ./SampleApi/SampleApi.csproj
+RUN dotnet restore ./SampleApi.csproj
 
 # Copy everything else and build
-RUN dotnet publish -c Release -o out ./SampleApi/SampleApi.csproj
+RUN dotnet publish -c Release -o out ./SampleApi.csproj
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
