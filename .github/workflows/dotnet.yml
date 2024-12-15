@@ -28,7 +28,6 @@ jobs:
 
   run_tests:
     runs-on: ubuntu-24.04 # ubuntu-latest OR ubuntu-24.04
-    needs: [ deploy_docker_first ]
     steps:
       - uses: actions/checkout@v4
 
