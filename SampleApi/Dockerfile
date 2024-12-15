@@ -8,7 +8,7 @@ COPY . SampleApi
 RUN dotnet restore ./SampleApi.csproj
 
 # Copy everything else and build
-RUN dotnet publish -c Release -o out ./SampleApi.csproj
+RUN dotnet publish --no-restore -c Release -o out ./SampleApi.csproj
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
