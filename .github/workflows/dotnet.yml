@@ -102,21 +102,13 @@ jobs:
       #     username: ${{ github.repository_owner }}
       #     password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Test Output Of Step With Bash
-        shell: bash
-        run: echo "some outpout that should be visible!"
-      - name: Test Output Of Step With PowerShell
-        shell: pwsh
-        run: |
-          echo "some outpout that should be visible!"
-
       - name: Find API projects and build Docker images
         shell: pwsh
         run: |
           foreach($file in (Get-ChildItem "." -Recurse -Include *.csproj)) {
             $CSPROJ_PATH = $file.FullName
 
-            Write-Information "::warning file=dotnet.yml,line=111,endLine=111,title=Build Docker Step::Building Docker from file for project $CSPROJ_PATH"
+            echo "::warning file=dotnet.yml,line=111,endLine=111,title=Build Docker Step::Building Docker from file for project $CSPROJ_PATH"
 
             $IS_PACKABLE = Select-String -Path $CSPROJ_PATH -Pattern '<IsPackable>(.*?)</IsPackable>' | ForEach-Object { $_.Matches.Groups[1].Value }
             if ($IS_PACKABLE -eq "true") {
@@ -133,12 +125,12 @@ jobs:
             $DOCKER_FILE_PATH = Join-Path $PROJECT_DIR "Dockerfile"
 
             if (-not (Test-Path $DOCKER_FILE_PATH)) {
-              Write-Host "::debug::No Docker file found at path $DOCKER_FILE_PATH"
+              echo "No Docker file found at path $DOCKER_FILE_PATH"
               continue
             }
-
-            Write-Host "::debug::Building Docker from file found at path $DOCKER_FILE_PATH"
-
+            
+            echo "No Docker file found at path $DOCKER_FILE_PATH"
+            
             #docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" -t "ghcr.io/${{ github.repository_owner }}/$(projectName):latest" --push $PROJECT_DIR
             docker buildx build --platform linux/amd64,linux/arm64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$(projectName):latest" --push $PROJECT_DIR
           }
