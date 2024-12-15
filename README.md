@@ -48,7 +48,7 @@ As an example, we can use write a debug message to the action-log in a
 PowerShell script with this line:
 
 ```
-Write-Host "::debug::This is a debug message."
+echo "::debug::This is a debug message."
 ```
 
 Please note that `::debug` signifies a core-function of the action runner
