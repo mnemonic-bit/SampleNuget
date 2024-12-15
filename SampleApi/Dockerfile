@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
-COPY ../SampleApi/. SampleApi
+COPY . SampleApi
 # Copy all other dependecies as well before restoring and building.
 RUN dotnet restore ./SampleApi/SampleApi.csproj
 
