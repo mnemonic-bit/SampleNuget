@@ -102,10 +102,14 @@ jobs:
       #     username: ${{ github.repository_owner }}
       #     password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Test Output Of Step
+      - name: Test Output Of Step With Bash
         shell: bash
         run: echo "some outpout that should be visible!"
-        
+      - name: Test Output Of Step With PowerShell
+        shell: pwsh
+        run: |
+          echo "some outpout that should be visible!"
+
       - name: Find API projects and build Docker images
         shell: pwsh
         run: |
