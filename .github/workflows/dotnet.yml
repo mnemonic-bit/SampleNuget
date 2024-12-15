@@ -136,7 +136,7 @@ jobs:
               continue
             }
 
-            Write-Host "::notice file=dotnet.yml,line=111,endLine=140,title=Build and Push::Building Docker image from file for project $($CSPROJ_PATH)."
+            Write-Host "::notice file=dotnet.yml,line=111,endLine=140,title=Build and Push::Building Docker image from file for project $($CSPROJ_PATH) for version $($VERSION)."
             
             Push-Location -Path $PROJECT_DIR
 
