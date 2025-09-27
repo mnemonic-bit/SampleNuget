@@ -1,0 +1,27 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Required: Embed compiler-generated sources in the PDB, e.g. AssemblyInfo.cs -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Required: Include repository URL in package metadata -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Include PDB files; this will increase package size, and it it recommended to set up a symbol-server for this instead. -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <!-- Optional: Will mark this as a result of a CI/CD pipeline. -->
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Required: Enable SourceLink for the project. Since net8.0 this can be omitted, and replaced by -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <!--<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>-->
+  </ItemGroup>
+
+
+</Project>
