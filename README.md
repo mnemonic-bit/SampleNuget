@@ -32,6 +32,21 @@ which is then used in the Github action.
 
 ## How Can We Push Docker Container Images To hub.docker.com or ghcr.io?
 
+For Docker images to be created, we need to place a Dockerfile at the root
+level of each project folder. The Dockerfile must specify how the Docker
+image is to be built.
+
+A Github action to build and push a Docker image needs some API keys to
+interact with the Docker registry.
+
+
+### Setting Up hub.docker.com
+
+For our Github action to push a Docker image to the registry, we need to
+add 2 secrets to the Github repository. For our sample project and the
+scripts contained in it.
+
+
 
 
 ## How Can We Enable Debug Log-Messages For Github Actions?

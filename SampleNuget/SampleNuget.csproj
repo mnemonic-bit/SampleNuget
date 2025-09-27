@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <LangVersion>8.0</LangVersion>
-    <Version>0.5.34</Version>
+    <Version>0.6.0</Version>
     <OutputType>library</OutputType>
 
     <Title>Nuget sample project</Title>
@@ -25,12 +25,38 @@
 
 	  <AssemblyName>SampleNuget</AssemblyName>
 	  <RootNamespace>SampleNuget</RootNamespace>
-    <Nullable>enable</Nullable>    
+    <Nullable>enable</Nullable>
+
+
+    <!-- Required for SourceLink: Embed compiler-generated sources in the PDB, e.g. AssemblyInfo.cs -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Required for SourceLink: Include repository URL in package metadata -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <!-- Optional for SourceLink: Include PDB files; this will increase package size, and it it recommended to set up a symbol-server for this instead. -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
+
+  <!-- Introduced for SourceLink: Will mark this as a result of a CI/CD pipeline. -->
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <!-- Required for SourceLink -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <!--<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.2.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>-->
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="README.md" Pack="true" PackagePath="" />
