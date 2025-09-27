@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a pingable instance
     /// </summary>
-    public sealed class Pingable : IPingable
+    internal sealed class Pingable : IPingable
     {
 
         /// <summary>
