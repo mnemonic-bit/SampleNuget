@@ -9,6 +9,22 @@ There are two points of interest here:
 * The `SampleNuget/SampleNuget.csproj` file which contains a lot of useful tags.
 * The `.github/workflows/dotnet.yml` file which defines how the parts come all together by means of a Github action.
 
+I have also added two props-files to the repository which contain common
+project settings. Both files are then included in the other csproj files.
+At the moment there are two different props-files:
+* the `CommonSample.porps` file contains common project properties like the version tag.
+* the `SourceLink.props` file contains all project properties needed to enable SourceLink for a project.
+
+Each props-file is then included in one or more csproj files. This is done
+by adding the line like
+
+```
+<Import Project="../Common/SourceLink.props" />
+```
+
+which will add all properties to the csproj file, which in this example
+will effectively enable SourceLink for that project.
+
 
 ## How Can We Push Nuget Packages to Nuget.org?
 
