@@ -3,6 +3,11 @@
 # This is the first layer, which is used to compile the binaries.
 # We call that layer build-env.
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+
+# Copy the common props files to a Common folder
+WORKDIR /Common
+COPY --from=commonprops . ./
+
 WORKDIR /src
 
 # Copy the csproj and restore the referenced Nugets

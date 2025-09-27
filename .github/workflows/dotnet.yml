@@ -141,7 +141,7 @@ jobs:
             $DOCKER_REPO_NAME = $PROJECT_NAME.ToLower()
 
             # Note: The parameter --platform linux/amd64,linux/arm64 can be used as well, but Dotnet does not seem to be ready for this kind of platform.
-            docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($VERSION)" --push $PROJECT_DIR
+            docker buildx build --build-context commonprops=../Common --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($VERSION)" --push $PROJECT_DIR
             # Activate this line instead of the previour line to push to both, hub.docker.com, as well as ghcr.io
             #docker buildx build --platform linux/amd64 -t "${{ secrets.DOCKERHUB_USERNAME }}/$($DOCKER_REPO_NAME):$($VERSION)" -t "ghcr.io/${{ github.repository_owner }}/$($DOCKER_REPO_NAME):$($VERSION)" --push $PROJECT_DIR
 
