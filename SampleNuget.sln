@@ -7,7 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleNuget", "SampleNuget\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApi", "SampleApi\SampleApi.csproj", "{EDD17319-E3E7-492C-91F9-0C361065D955}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleNuget.Tests", "SampleNuget.Tests\SampleNuget.Tests.csproj", "{5AEF04FE-9DB1-5BDD-DA6B-3F11BD1F834D}"
+Project("{63AD84E9-AF2B-433D-A318-02213DF9EEC8}") = "SampleNuget.Tests", "SampleNuget.Tests\SampleNuget.Tests.csproj", "{5AEF04FE-9DB1-5BDD-DA6B-3F11BD1F834D}"
+Project("{37C99770-844E-462C-AD33-A2EB58884F0A}") = "SampleNativeNuget", "SampleNativeNuget\SampleNativeNuget.csproj", "{7D152E4B-8BD5-48FD-8ED6-0B5DEDA6E3DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +28,10 @@ Global
 		{5AEF04FE-9DB1-5BDD-DA6B-3F11BD1F834D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AEF04FE-9DB1-5BDD-DA6B-3F11BD1F834D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AEF04FE-9DB1-5BDD-DA6B-3F11BD1F834D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D152E4B-8BD5-48FD-8ED6-0B5DEDA6E3DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D152E4B-8BD5-48FD-8ED6-0B5DEDA6E3DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D152E4B-8BD5-48FD-8ED6-0B5DEDA6E3DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D152E4B-8BD5-48FD-8ED6-0B5DEDA6E3DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

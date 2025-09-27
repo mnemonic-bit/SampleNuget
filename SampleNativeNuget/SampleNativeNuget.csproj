@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../Common/CommonSample.props"/>
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+
+    <OutputType>library</OutputType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>9.0</LangVersion>
+
+    <AssemblyName>SampleNativeNuget</AssemblyName>
+    <RootNamespace>SampleNativeNuget</RootNamespace>
+
+    <Title>Nuget native sample project</Title>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+
+    <PackageId>mnemonic-bit.SampleNativeNuget</PackageId>
+    <Description>Sample project for demonstrating how to include native code in a Nuget package.</Description>
+    <PackageTags>sample, nuget, package, native code</PackageTags>
+    <IsPackable>true</IsPackable>
+    <IsTrimmable>true</IsTrimmable>
+
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="../nativelibrary/native.*" Pack="true" PackagePath="/">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+  </ItemGroup>
+  
+</Project>
