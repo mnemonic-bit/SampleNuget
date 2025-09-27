@@ -1,4 +1,5 @@
-﻿using YamlDotNet.Serialization;
+﻿using System.IO;
+using YamlDotNet.Serialization;
 
 namespace SampleApi.Controllers.Extensions
 {

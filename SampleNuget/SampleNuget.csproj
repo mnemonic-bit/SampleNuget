@@ -1,16 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="../Common/Sample.props"/>
+  
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0;net8.0</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
-    <Version>0.6.0</Version>
     <OutputType>library</OutputType>
 
     <Title>Nuget sample project</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-
-    <RepositoryUrl>https://github.com/mnemonic-bit/SampleNuget.git</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
 
     <Authors>mruether</Authors>
     <Copyright>mruether</Copyright>
@@ -25,7 +22,6 @@
 
 	  <AssemblyName>SampleNuget</AssemblyName>
 	  <RootNamespace>SampleNuget</RootNamespace>
-    <Nullable>enable</Nullable>
 
 
     <!-- Required for SourceLink: Embed compiler-generated sources in the PDB, e.g. AssemblyInfo.cs -->
